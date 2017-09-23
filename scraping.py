@@ -3,10 +3,10 @@ import json
 import pandas as pd 
 import numpy as np
 import matplotlib.pyplot as plt
+import subprocess
 import matplotlib
+import twitterscraper
 matplotlib.style.use("ggplot")
-
-json_file = "tweets.json"
 
 def popularity(tweet):
 	try:
@@ -21,23 +21,41 @@ def chrono(tweet):
 	except KeyError:
 		return ""
 
-tweets = query_tweets("rlcs", 100)
-tweetpopular = []
-for tweet in tweets:
-	tweetpopular.append(popularity(tweet))
+def getTweetString(tweet):
+	return(str(tweet.user)+","+str(tweet.id)+","+str(tweet.timestamp)+","+str(tweet.fullname)+","+str(tweet.text)+","+str(tweet.replies)+","+str(tweet.retweets)+","+str(tweet.likes))
 
-s = pd.Series(tweetpopular)
+query = input("What tweets do you want to search for?")
+amount = input("How many tweets would you like to get?")
 
-tester = s.plot()
-fig = tester.get_figure()
-fig.savefig("tester.png")
+tweets = query_tweets(query, int(amount))
+
+
+with open("output.txt", "w", encoding="utf-8") as out:
+	for tweet in tweets:
+		out.write(getTweetString(tweet)+"\n")
+
+
+
+# completed = subprocess.call(args= ["cd",  "C:\Users\Kevin\Documents\Bowdoin\Fall 2017\MHacks")
+# completed = subprocess.call(args=["twitterscraper", query, "--limit", amount, "--output=tweets.json"], shell=True)
+
+# tweetpopular = []
+# for tweet in tweets:
+#   tweetpopular.append(popularity(tweet))
+
+# s = pd.Series(tweetpopular)
+
+# tester = s.plot()
+# fig = tester.get_figure()
+# fig.savefig("tester.png")
+
 
 
 # tweets = sorted(tweets, key = popularity, reverse=True)
 
 
 # for tweet in tweets:
-# 	print(tweet.text)
-# 	print(str(popularity(tweet)))
-# 	print(str(tweet.likes)+str(tweet.retweets)+str(tweet.replies) + "\n")
+#   print(tweet.text)
+#   print(str(popularity(tweet)))
+#   print(str(tweet.likes)+str(tweet.retweets)+str(tweet.replies) + "\n")
 
