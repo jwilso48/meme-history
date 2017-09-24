@@ -34,6 +34,10 @@ with open("output.txt", "w", encoding="utf-8") as out:
 	for tweet in tweets:
 		out.write(getTweetString(tweet)+"\n")
 
+with open("bubblesize.txt", "w", encoding="utf-8") as bubble:
+	for tweet in tweets:
+		bubble.write(str(tweet.text)+"\t"+str(1+int(tweet.likes)+int(tweet.replies)+int(tweet.retweets)))
+
 
 
 # completed = subprocess.call(args= ["cd",  "C:\Users\Kevin\Documents\Bowdoin\Fall 2017\MHacks")
