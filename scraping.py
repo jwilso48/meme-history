@@ -22,7 +22,7 @@ def chrono(tweet):
 		return ""
 
 def getTweetString(tweet):
-	return(str(tweet.user)+","+str(tweet.id)+","+str(tweet.timestamp)+","+str(tweet.fullname)+","+str(tweet.text)+","+str(tweet.replies)+","+str(tweet.retweets)+","+str(tweet.likes))
+	return(str(tweet.user)+"\t"+str(tweet.id)+"\t"+str(tweet.timestamp)+"\t"+str(tweet.fullname)+"\t"+str(tweet.text)+"\t"+str(tweet.replies)+"\t"+str(tweet.retweets)+"\t"+str(tweet.likes))
 
 query = input("What tweets do you want to search for?")
 amount = input("How many tweets would you like to get?")
